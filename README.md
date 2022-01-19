@@ -1,6 +1,6 @@
 # Turro's Personal Site
 
-[comment]: <> ([![Website http://TurroScott.web.illinois.edu ]&#40;https://img.shields.io/website-up-down-green-red/http/shields.io.svg&#41;]&#40;http://quantumtomo.web.illinois.edu/&#41;)
+[![Website http://TurroScott.web.illinois.edu/](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://TurroScott.web.illinois.edu/)
 
 This website is to provide a more detailed view of my work than a standard resume:
 [turroscott.web.illinois.edu](http://TurroScott.web.illinois.edu)
