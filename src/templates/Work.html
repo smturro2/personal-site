@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<!-- CSS for child page-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/LinkedInEmbed.css') }}">
+{% endblock %}
+
+{% block body %}
+<!--Table of contents-->
+<div id="toc_container">
+    <p class="toc_title">Contents</p>
+    <ul class="toc_list">
+        <li><a href="#MagnetarCapital">Magnetar Captial</a></li>
+        <li><a href="#Qubitekk">Qubitekk</a></li>
+        <li><a href="#Kwiat">Kwiat Quantum Information Group</a></li>
+    </ul>
+</div>
+
+<div id="BodyContent">
+
+    <!-- Magnetar Capital -->
+    <div class="InfoSection" id="MagnetarCapital">
+        <div class="company_title">
+            <!--<h1>Magnetar Capital</h1>-->
+            <img src="{{ url_for('static', filename='img/magnetar_capital.png') }}" class="company_logo" alt="Magnetar Capital">
+        </div>
+        <p>
+            Working as a part time analyst at this hedge fund gave me practical experience during my final years of college. I worked
+            independently on two projects, both of which involved porting a financial model from excel into python.
+            My group respected the fact that school came first by being patient and supportive.
+        </p>
+
+        <h2>Summary of Tasks</h2>
+        <ul class="Tasks">
+            <li>Streamlined the process of collecting portfolio data from external and internal SQL databases using pandas</li>
+            <li>Visualized the contents of portfolios in an Excel dashboard so senior analysts could evaluate the investment</li>
+            <li>Ported an Excel model into Python that calculates the internal rate of return of Collateralized Debt Obligations</li>
+            <li>Collaborated with a cross functional team to retrieve the cash flow of the individual loans</li>
+        </ul>
+    </div>
+
+
+    <!-- Qubitekk -->
+    <div class="InfoSection" id="Qubitekk">
+        <div class="company_title">
+            <!--<h1>Qubitekk</h1>-->
+            <img src="{{ url_for('static', filename='img/qubitekk.png') }}" style="height:90px;" class="company_logo" alt="Qubitekk Inc">
+        </div>
+        <p>
+            I had the opportunity to work alongside the Research and Development team at Qubitekk. They are a
+            start-up company developing optical components and systems for the quantum industry. The people there
+            are very welcoming and truly valued my ideas.
+        </p>
+        <ul>
+            <li><a href="https://mrl.illinois.edu/news/42305">Article About My Experience</a></li>
+        </ul>
+
+        <h2>Summary of Tasks</h2>
+        <ul class="Tasks">
+            <li>Created a numerical method to find the optimal settings for a laser with 97.75% less measurements than before</li>
+            <li>Translated a mathematical algorithm into python that aligns an optical system based on output measurement data</li>
+            <li>Simulated the devices to back test the software due to limited access to the devices</li>
+            <li>Provided consulting on various github strategies and tips</li>
+            <li>Designed, developed, and documented classes that controlled the hardware</li>
+            <li>Searched for inefficiencies by visualizing performance vs settings using ggplot2 in R and Matplotlib in Python</li>
+            <li>Created environment to run Quantum Tomographys</li>
+        </ul>
+        <!-- LinkedIn Embedding -->
+        <!-- Instructions on how to perform this embedding are avaiable here https://www.damosdesigns.com/LinkedinRecommendationsOnWebsite/-->
+        <h4 class="linkedInRecc">Recommendation from LinkedIn</h4>
+        <div class="linkedInRecc">
+            <ul class="section-info" tabindex="-1">
+            <li id="ember531" class="pv-recommendation-entity ember-view">
+                <div class="pv-recommendation-entity__header">
+                    <a data-control-name="recommendation_details_profile" href="https://www.linkedin.com/in/danielmulkey/" target="_blank" id="ember532" class="pv-recommendation-entity__member ember-view">
+                        <img src="https://media-exp1.licdn.com/dms/image/C5603AQFwJu5h3_InjA/profile-displayphoto-shrink_100_100/0/1516770576274?e=1639008000&amp;v=beta&amp;t=ZeX5zmjyCzOhrXs9QeZXEwbNcqhgsXIlH0lOirLfXvU" loading="lazy" alt="Daniel Mulkey" id="ember533" class="EntityPhoto-circle-4 fl lazy-image ember-view" width="56" height="56">
+                        <div class="pv-recommendation-entity__detail">
+                            <h3 class="t-16 t-black t-bold">Daniel Mulkey</h3>
+                            <p class="pv-recommendation-entity__headline t-14 t-black t-normal pb1">Senior Optical Engineer at Daylight Solutions</p>
+                            <p class="t-12 t-black--light t-normal">
+                              August 10, 2021, Daniel managed Scott directly
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="pv-recommendation-entity__highlights" onclick="window.open('https://www.linkedin.com/in/scott-turro/', '_blank');">
+                    <blockquote class="pv-recommendation-entity__text relative">
+                        <div id="ember534" class="ember-view">
+                            <span class="lt-line-clamp__raw-line">
+                                <p>
+                                    Scott was our remote software intern for the summer of 2021 and he was phenomenal. His time was focused on three projects and he was highly beneficial to each.
+                                </p>
+                                <p>
+                                    On one project he got to demonstrate his prior knowledge on quantum tomography. He was immediately competent and easily picked up the newer parts regarding instrument control. Even knowing this was something he had experience with, we were still impressed by how quickly he made real progress.
+                                </p>
+                                <p>
+                                    Scott also seems to have the right intuition for efficiently working on technical tasks. He would push the task along, notice when something seems amiss, verify that his work was correct, and then bring it up politely. As a remote employee he had no means to debug hardware and there were multiple times hardware issues came up. Scott's patient approach to these scenarios ensured his portion was correct and enabled us to get him up and running again quickly.
+                                </p>
+                                <p>
+                                    Scott was always friendly and eager to contribute. He made sure we were set up for success at the conclusion of his internship by writing documentation for the code as well as spending some time handing off various scripts. On all projects, he regularly brought and implemented valuable ideas that we wouldn't have picked up anywhere else.
+                                </p>
+                                <p>
+                                    Scott will be a strong asset to any organization and I'd hire him back in a heartbeat.
+                                </p>
+                            </span>
+                        </div>
+                    </blockquote>
+                </div>
+            </li>
+        </ul>
+        </div>
+    </div>
+
+
+    <!-- Kwiat Quantum Information Group -->
+    <div class="InfoSection" id="Kwiat">
+        <div class="company_title">
+        <img src="{{ url_for('static', filename='img/uiuc_block_i.png') }}" style="height:110px;padding-bottom:23px;" class="company_logo" alt="UIUC Logo">
+        <h1 style="display:inline;font-size:36px;">Kwiat Quantum Information Group</h1>
+        </div>
+        <p>
+            Kwiat's research group explores and implements innovative Quantum protocols. As I freshman I was given the task
+            to repair an online interface that calculated quantum state tomography. By my junior year I turned
+            this script into a publicly available python package available on PyPi where it has received thousands of downloads.
+            Professor Kwiat does such a great job managing the group. The people are helpful and a family vibe radiates through the meetings.
+        </p>
+        <ul>
+            <li><a href="https://pypi.org/project/Quantum-Tomography/">PyPi Page for Quantum-Tomography</a></li>
+            <li><a href="https://quantumtomo.web.illinois.edu/">Library Website Made by Joey Shallat and I</a></li>
+        </ul>
+
+        <h2>Summary of Tasks</h2>
+        <ul class="Tasks">
+            <li>Independently redesigned Python code that uses MLE to reconstruct quantum states from measurement data</li>
+            <li>Automated the testing of several settings which account for experimental errors</li>
+            <li>Published the package on PyPI, providing access to over a thousand Python developers</li>
+            <li>Envisioned, purposed, and produced a documentation site and lead a new team member to help with the project</li>
+            <li>Investigated Bayesian MCMC methods with a doctoral student to improve the algorithm for small data scenarios</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

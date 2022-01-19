@@ -1,0 +1,25 @@
+#toc_container {
+    width: 17%;
+    position: fixed;
+
+}
+#toc_container p {
+    margin: 0;
+    margin-top: 25px;
+    width: max-content;
+    padding-left: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#toc_container li {
+    margin:10px 0;
+}
+
+#toc_container a {
+    color:black;
+    text-decoration: none;
+}
+#toc_container a:hover {
+    color:#888888;
+}

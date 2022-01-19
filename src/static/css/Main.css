@@ -1,0 +1,111 @@
+body {
+    overflow-x:hidden;
+    font-family:'Roboto', sans-serif;
+}
+
+div#BodyContent {
+    padding:15px 17%;
+}
+/* Footer Stuff */
+footer {
+    border-top:lightgrey solid 2px;
+    padding:15px 17%;
+}
+footer p {
+    text-align: center;
+}
+footer div.row {
+    margin:auto !important;
+    text-align: center;
+}
+footer a {
+   display: block;
+}
+
+/* Jumpotron stuff*/
+.jumbotron {
+    /* Center and scale the image nicely */
+    background-image: url('../img/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #ecf0f1;
+    height: 350px;
+    background-attachment: fixed;
+    text-shadow: 2px 2px 4px #000000;
+    color:white;
+}
+.jumpotron img{
+    position:absolute;
+    margin-left: -30px;
+}
+.jumbotron p {
+    margin:0px;
+}
+
+.jumbotron h1 {
+    font-size:64px;
+    margin-top: -5px;
+}
+
+/* Info Sections*/
+div.InfoSection {
+    margin-bottom: 150px;
+    margin-left: 15px;
+}
+div.InfoSection img.company_logo{
+    height: 120px;
+    padding:10px;
+}
+div.InfoSection div.company_title{
+    border-bottom: 2px solid;
+    margin-bottom: 15px;
+}
+div.InfoSection h1{
+    font-size: 46px;
+    padding: 7px;
+}
+div.InfoSection h2{
+    font-size: 22px;
+    padding-top: 10px;
+}
+div.InfoSection table.education_table{
+    margin-top: -10px;
+    width:100%;
+}
+div.InfoSection table.education_table td.right_side{
+    text-align: right;
+}
+
+
+/* top 5 favorite classes */
+div.top_5_classes {
+    cursor: pointer;
+    border:solid #13294B;
+    border-radius: 0px 15px 15px 15px;
+}
+h2.top_5_classes {
+    background-color: #FF552E;
+    color: #13294B;
+    border-radius: 10px 10px 0 0;
+    width: max-content;
+    border-color: #13294B;
+    border-width: 3px 3px 0 3px;
+    border-style: solid;
+    margin: 0px;
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px !important;
+}
+div.top_5_classes table{
+    margin:5px !important;
+}
+
+
+
+/* Task lists */
+.Tasks {
+}
+
+
+

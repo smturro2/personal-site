@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div id="BodyContent">
+    <h1>Resume</h1>
+    <p>I prefer to customize my Resume's based on the jobs I'm applying for. If you email me the job description at <a href = "mailto: turroscott@gmail.com">turroscott@gmail.com</a>
+        I'll be very excited to get back to you. Otherwise you can view some generic resume's below based on the type of job.
+    </p>
+    <ul>
+        <li><a href="{{ url_for('static', filename='resume/resume_turro_f.pdf') }}" download>Resume for financial related positions</a></li>
+        <li><a href="{{ url_for('static', filename='resume/resume_turro_ds.pdf') }}" download>Resume for data science related positions</a></li>
+    </ul>
+</div>
+{% endblock %}

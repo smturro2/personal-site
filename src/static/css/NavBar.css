@@ -1,0 +1,10 @@
+.navbar-header {
+    font-size: 30px;
+    color: white;
+    border-left: #555d50 solid 2px;
+    padding: 0px 40px;
+}
+
+.nav-item {
+    padding:0px 15px;
+}
