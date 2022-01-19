@@ -1,8 +1,9 @@
 # Turro's Personal Site
 
-[comment]: <> ([![Website http://quantumtomo.web.illinois.edu/]&#40;https://img.shields.io/website-up-down-green-red/http/shields.io.svg&#41;]&#40;http://quantumtomo.web.illinois.edu/&#41;)
+[comment]: <> ([![Website http://TurroScott.web.illinois.edu ]&#40;https://img.shields.io/website-up-down-green-red/http/shields.io.svg&#41;]&#40;http://quantumtomo.web.illinois.edu/&#41;)
 
-This website is to provide a more detailed view of my work than a standard resume.
+This website is to provide a more detailed view of my work than a standard resume:
+[turroscott.web.illinois.edu](http://TurroScott.web.illinois.edu)
 
 ## Setup
 This python application is built, tested, and hosted around python 3.8. 
@@ -18,7 +19,7 @@ For best results [install this version of python](https://www.python.org/downloa
 
         src\venv\Scripts\activate.bat
 
-4. Install the **requirements**. Don't upgrade pip, this might cause an error and you'll be left without pip. If this happens then just delete the venv folder and start over
+4. Install the **requirements**. 
 
          pip install -r src\requirements.txt
          
