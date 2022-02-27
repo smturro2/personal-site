@@ -11,6 +11,9 @@
     font-size: 25px;
     font-weight: bold;
 }
+#toc_container p.toc_title {
+    text-decoration:underline;
+}
 
 #toc_container li {
     margin:10px 0;

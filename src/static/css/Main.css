@@ -22,23 +22,19 @@ footer a {
    display: block;
 }
 
-/* Jumpotron stuff*/
 .jumbotron {
-    /* Center and scale the image nicely */
-    background-image: url('../img/background.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #ecf0f1;
-    height: 350px;
-    background-attachment: fixed;
     text-shadow: 2px 2px 4px #000000;
-    color:white;
+    color: white;
+    max-width: 100%;
+    margin: auto;
+    height: fit-content;
 }
-.jumpotron img{
-    position:absolute;
-    margin-left: -30px;
+.jumbotron img{
+    max-width:100%;
+    margin:auto;
+    display:block;
 }
+
 .jumbotron p {
     margin:0px;
 }
