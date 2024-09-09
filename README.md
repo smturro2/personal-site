@@ -29,7 +29,7 @@ This website is to provide a more detailed view of my work than a standard resum
 
 ## Troubleshooting
 
-Note after 6 years of python development: Ahh... the hell of trying to set up python for the first time...
+Note(after 6 years of python development): Ahh... the hell of trying to set up python for the first time...
 
 - *'py' is not recognized*. 
   - Depending on how you downloaded python your PATH variable for python (the _py_ in this walkthrough) may be diffrent.
