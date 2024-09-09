@@ -1,4 +1,4 @@
-from flask import Flask, render_template, # flash, make_response, redirect, request, jsonify,
+from flask import (Flask, render_template)  # flash, make_response, redirect, request, jsonify,
 # import matplotlib.pyplot as plt
 # from matplotlib.figure import Figure
 # from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
