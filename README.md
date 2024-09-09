@@ -1,11 +1,9 @@
 # Turro's Personal Site
 
-todo: edit website links
-
-[![Website http://TurroScott.web.illinois.edu/](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://TurroScott.web.illinois.edu/)
+[![Website https://personal-site-5mhro.ondigitalocean.app//](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://personal-site-5mhro.ondigitalocean.app//)
 
 This website is to provide a more detailed view of my work than a standard resume:
-[turroscott.web.illinois.edu](http://TurroScott.web.illinois.edu)
+[personal-site-5mhro.ondigitalocean.app/](https://personal-site-5mhro.ondigitalocean.app/)
 
 ## Setup
 1. **Clone** the repo to your local computer
