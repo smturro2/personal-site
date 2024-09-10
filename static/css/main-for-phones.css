@@ -9,4 +9,8 @@
     div#BodyContent {
         padding:15px 2%;
     }
+
+    #Resume {
+        display: none;
+    }
 }

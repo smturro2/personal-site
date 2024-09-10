@@ -133,7 +133,7 @@ h2#interests {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
-    width: 150px;
+    width: 140px;
 }
 .interest img {
     max-width: auto;
@@ -143,4 +143,53 @@ h2#interests {
 .interest h3 {
     margin: 0;
     font-size: 16px;
+}
+
+/* Resume Stuff */
+div#ResumeButtons a {
+    margin: 5px;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+div#Resume {
+    height: 100%;
+    width: 100%;
+
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;  /* Added rounded edges */
+}
+
+
+/* Style for the footer */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    line-height: 1.2;
+}
+footer .row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+footer .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 20px;
+
+}
+footer h5 {
+    margin:0px;
+}
+footer a {
+    display: block;
+    color: #007bff;
+    text-decoration: none;
+    margin: 5px 0;
+}
+footer a:hover {
+    text-decoration: underline;
 }
