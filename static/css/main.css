@@ -3,6 +3,14 @@ body {
     font-family:'Roboto', sans-serif;
 }
 
+h1#welcome_header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    width: 100%;
+    max-width: 800px;
+}
+
 div#BodyContent {
     padding:15px 17%;
 }
@@ -103,5 +111,36 @@ div.top_5_classes table{
 .Tasks {
 }
 
-
-
+/* Interests on home page */
+h2#interests {
+    margin-top: 50px;
+    font-size: 2em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    width: 100%;
+    max-width: 800px;
+}
+.interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.interest {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 150px;
+}
+.interest img {
+    max-width: auto;
+    height: 70px;
+    margin-bottom: 10px;
+}
+.interest h3 {
+    margin: 0;
+    font-size: 16px;
+}
