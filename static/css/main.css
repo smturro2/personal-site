@@ -144,3 +144,11 @@ h2#interests {
     margin: 0;
     font-size: 16px;
 }
+
+div#ResumeButtons a {
+    margin: 5px;
+}
+div#Resume {
+    height: 100%;
+    width: 100%;
+}
