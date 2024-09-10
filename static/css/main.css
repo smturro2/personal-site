@@ -4,7 +4,7 @@ body {
 }
 
 h1#welcome_header {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 2px solid #ddd;
     width: 100%;
@@ -62,7 +62,7 @@ div.InfoSection img.company_logo{
     padding:10px;
 }
 div.InfoSection div.company_title{
-    border-bottom: 2px solid;
+    border-bottom: 2px solid #ddd;
     margin-bottom: 15px;
 }
 div.InfoSection h1{
