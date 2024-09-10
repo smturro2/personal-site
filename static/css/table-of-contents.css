@@ -17,12 +17,16 @@
 
 #toc_container li {
     margin:10px 0;
+    line-height: 1.2;
 }
 
 #toc_container a {
-    color:black;
+    color: #0056b3; /* Blue color for links */
     text-decoration: none;
+    font-weight: normal; /* Normal font weight for links */
 }
+
 #toc_container a:hover {
-    color:#888888;
+    color: #003366; /* Darker blue for hover effect */
+    text-decoration: underline; /* Underline on hover */
 }
