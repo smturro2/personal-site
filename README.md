@@ -40,15 +40,22 @@ Other common names are _python_ or _python3_. Its whatever you type into the com
 use *py -m pip*. It is rare but if you downloaded python in a weird way you may not have pip installed. You'll have to search for how to install pip on your computer. 
 The process differs depending on if you're using PC/mac/ubuntu.
 
-## Quantum-Tomography Code
+[//]: # ()
+[//]: # (## Quantum-Tomography Code)
 
-Note: I dont know if I still need this
+[//]: # ()
+[//]: # (Note: I dont know if I still need this)
 
-This code uses the quantum-tomography python code as a submodule. You will need to update this when
-you first clone this repo.
+[//]: # ()
+[//]: # (This code uses the quantum-tomography python code as a submodule. You will need to update this when)
 
-        git submodule update --init
+[//]: # (you first clone this repo.)
 
-To update the Quantum-Tomography code run the command:
+[//]: # ()
+[//]: # (        git submodule update --init)
 
-        git submodule update --remote --merge
+[//]: # ()
+[//]: # (To update the Quantum-Tomography code run the command:)
+
+[//]: # ()
+[//]: # (        git submodule update --remote --merge)
