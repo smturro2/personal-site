@@ -1,9 +1,9 @@
 # Turro's Personal Site
 
-[![Website https://personal-site-5mhro.ondigitalocean.app//](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://personal-site-5mhro.ondigitalocean.app//)
+[![Website https://turroscott-wn697.ondigitalocean.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://personal-site-5mhro.ondigitalocean.app//)
 
-This website is to provide a more detailed view of my work than a standard resume:
-[personal-site-5mhro.ondigitalocean.app/](https://personal-site-5mhro.ondigitalocean.app/)
+[This website](https://turroscott-wn697.ondigitalocean.app)
+provides a more detailed view of my work than a standard resume.
 
 # Dev Setup
 1. Use **Pipenv**
