@@ -11,7 +11,8 @@
 <div id="toc_container">
     <p class="toc_title">Contents</p>
     <ul class="toc_list">
-        <li><a href="#MagnetarCapital">Magnetar Captial</a></li>
+        <li><a href="#BlackRock">BlackRock</a></li>
+        <li><a href="#Magnetar">Magnetar</a></li>
         <li><a href="#Qubitekk">Qubitekk</a></li>
         <li><a href="#Kwiat">Kwiat Quantum Information Group</a></li>
     </ul>
@@ -19,8 +20,28 @@
 
 <div id="BodyContent">
 
+    <!-- BlackRock -->
+    <div class="InfoSection" id="BlackRock">
+        <div class="company_title">
+            <!--<h1>BlackRock</h1>-->
+            <img src="{{ url_for('static', filename='img/blackrock.png') }}" style="height: 85px;"class="company_logo" alt="Magnetar Capital">
+        </div>
+        <p>
+            BlackRock was a large shift from the smaller companies I had previously worked at.
+            I saw the importance of DevOps and MLOps in quant finance. I got a taste of
+            the big apple, and it was fun being an intern again in my mid-twenties.
+        </p>
+
+        <h2>Summary of Tasks</h2>
+        <ul class="Tasks">
+            <li>Deployed scikit-learn random forest model to predict probability of default of private bonds by refactoring data pipeline, automating manual execution of 7 Jupyter notebooks</li>
+            <li>Developed dashboard to analyze commercial mortgage-backed securities, ingesting data from multiple vendors and running scenarios across multiple threads to decrease loading times by over 60%</li>
+        </ul>
+    </div>
+
+
     <!-- Magnetar Capital -->
-    <div class="InfoSection" id="MagnetarCapital">
+    <div class="InfoSection" id="Magnetar">
         <div class="company_title">
             <!--<h1>Magnetar Capital</h1>-->
             <img src="{{ url_for('static', filename='img/magnetar_capital.png') }}" style="height: 158px;"class="company_logo" alt="Magnetar Capital">
@@ -35,13 +56,11 @@
 
         <h2>Summary of Tasks</h2>
         <ul class="Tasks">
-            <li>Conducted Monte Carlo simulations in MATLAB on a ~9.2B AuM credit portfolio using 100+ cashflow (CF) models, projecting cVaRs of asset classes in Alternative Credit & Fixed Income (ACFI) business</li>
-            <li>Performed and presented portfolio optimization of CFs to Global Head of ACFI, aiding monthly asset allocation</li>
-            <li>Designed and implemented Python integration tests to refactor codebase, port to python, and transition to cloud</li>
-            <li>Developed Collateralized Loan Obligations (CLOs) library and delivered to traders using Dockerized Streamlit app</li>
-            <li>Implemented stochastic hazard rate models to capture time-varying default risk and improve pricing of CLOs</li>
-            <li>Redesigned data pipeline using SQL Alchemy to automate pricing of bespoke tranche opportunities as cron job</li>
-            <li>Researched and presented the Forward Market Model which simulates the interest rate term structure as lognormal processes, leading to better risk management during the transition to SOFR curve</li>
+            <li>Conducted portfolio optimization of ~10B AuM credit fund by simulating 100+ cashflow (CF) models to assist the Global Head of ACFI in monthly asset allocation</li>
+            <li>Supported system's redesign by communicating design flaws and proposing new approaches to firm's Lead Technical Architect and Chief Financial Officer</li>
+            <li>Created Python library to pull CFs and generate PowerPoints, replacing the monthly manual process</li>
+            <li>Researched Forward Market Model and Dynamic Nelson-Siegel Model to improve macro-economic factors, building integration tests to analyze their effect on downstream CFs and portfolio CVaRs</li>
+            <li>Leveraged NumPy and Numba to run simulations of CLOs and calculate price under risk neutral measure</li>
         </ul>
     </div>
 
@@ -64,7 +83,7 @@
         <h2>Summary of Tasks</h2>
         <ul class="Tasks">
             <li>Improved quality assurance by implementing statistical tests which validate new entangled photon sources</li>
-            <li>Devised and tested statistical algorithm to sample lasers’ joint frequency spectrum, needing 97% less measurements than full scan</li
+            <li>Devised and tested statistical algorithm to sample lasers' joint frequency spectrum, needing 97% less measurements than full scan</li
             <li>Implemented control loop to align optical system based on measurement data</li>
             <li>Designed, developed, and documented python classes to control hardware over pyserial</li>
         </ul>
@@ -135,11 +154,11 @@
         <h2>Summary of Tasks</h2>
         <ul class="Tasks">
             <li>Researched Quantum Tomography and published Python Library to estimate spin of photons, which received 100+ downloads and assisted laboratories around the world validate experimental results</li>
-            <li>Implemented Monte Carlo Techniques to estimate errors in the state’s characteristics such as purity and entropy</li>
+            <li>Implemented Monte Carlo Techniques to estimate errors in the state's characteristics such as purity and entropy</li>
             <li>Utilized GitHub Actions and constructed test simulations to ensure a stable codebase</li>
             <li>Investigated Bayesian MCMC methods with a doctoral student to improve the algorithm for small data scenarios</li>
             <li>Proposed Flask website to document the algorithm and library. Received approval and mentored new group members to assist in project https://quantumtomo.web.illinois.edu/</li>
-            <li>Designated “Outstanding Undergraduate” by the Bardeen Chair of Physics, Paul Kwiat</li>
+            <li>Designated “Outstanding Undergraduate” by the Bardeen Chair of Physics</li>
         </ul>
     </div>
 </div>
