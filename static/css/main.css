@@ -84,7 +84,6 @@ div.InfoSection table.education_table td.right_side{
 
 /* top 5 favorite classes */
 div.top_5_classes {
-    cursor: pointer;
     border:solid #13294B;
     border-radius: 0px 15px 15px 15px;
 }
@@ -104,7 +103,24 @@ h2.top_5_classes {
 div.top_5_classes table{
     margin:5px !important;
 }
-
+div.top_5_classes_uchi {
+    border:solid #800000;
+    padding-right: 8px;
+}
+h2.top_5_classes_uchi {
+    background-color: #800000;
+    color: #FFFFFF;
+    border-color: #800000;
+}
+div.top_5_classes_LT {
+    border:solid #174c74;
+    padding-right: 8px;
+}
+h2.top_5_classes_LT {
+    background-color: #fcdb47;
+    color: #174c74;
+    border-color: #174c74;
+}
 
 
 /* Task lists */
