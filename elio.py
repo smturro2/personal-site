@@ -12,7 +12,7 @@ class StateManager:
         self._create_table()
 
     def get_db_path(self):
-        return 'state.db'
+        return 'elio_state.db'
 
     def _create_table(self):
         with sqlite3.connect(self.db_path) as conn:
@@ -57,10 +57,11 @@ class StateManager:
             conn.commit()
 
 
-def get_random_image(state):
-    all_files = (
-            [f'static/img/elio/elio_pics/{x}' for x in os.listdir('static/img/elio/elio_pics')]
-            # + [f'static/img/elio/{state}/{x}' for x in os.listdir(f'static/img/elio/{state}')]
-    )
+def get_random_image(state=None, add_food_images=False):
+    all_files = [f'static/img/elio/elio_pics/{x}' for x in os.listdir('static/img/elio/elio_pics')]
+
+    if state != None and add_food_images:
+        all_files.extend([f'static/img/elio/{state}/{x}' for x in os.listdir(f'static/img/elio/{state}')])
+
     random_img = random.choice(all_files)
     return random_img

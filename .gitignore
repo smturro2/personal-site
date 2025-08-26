@@ -1,3 +1,6 @@
+# project specific
+elio_state.db
+
 venv
 .idea
 _pycache_
