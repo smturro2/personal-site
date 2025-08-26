@@ -58,6 +58,15 @@ def set_elio_state():
     state_manager.set_state(new_state)
     return jsonify(state_manager.get_state())
 
+@app.route('/elio/feed-history', methods=['GET'])
+def get_feed_history():
+    return jsonify(state_manager.get_feed_history())
+
+@app.route('/elio/remove-feed-entry/<int:id>', methods=['DELETE'])
+def remove_feed_entry(id):
+    state_manager.remove_feed_entry(id)
+    return jsonify(success=True)
+
 if __name__ == "__main__":
     app.run(debug=True)
 

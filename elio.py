@@ -43,6 +43,19 @@ class StateManager:
             cursor.execute('INSERT INTO state (state, date) VALUES (?, ?)', (new_state, datetime.now(ZoneInfo('America/Chicago')).isoformat()))
             conn.commit()
 
+    def get_feed_history(self, max_entries=5):
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT id, state, date FROM state ORDER BY id DESC LIMIT ?', (max_entries,))
+            rows = cursor.fetchall()
+            return [{"id": row[0], "state": row[1], "date": row[2]} for row in rows]
+
+    def remove_feed_entry(self, entry_id):
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('DELETE FROM state WHERE id = ?', (entry_id,))
+            conn.commit()
+
 
 def get_random_image(state):
     all_files = (
