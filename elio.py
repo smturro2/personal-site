@@ -60,7 +60,7 @@ class StateManager:
 def get_random_image(state):
     all_files = (
             [f'static/img/elio/elio_pics/{x}' for x in os.listdir('static/img/elio/elio_pics')]
-            + [f'static/img/elio/{state}/{x}' for x in os.listdir(f'static/img/elio/{state}')]
+            # + [f'static/img/elio/{state}/{x}' for x in os.listdir(f'static/img/elio/{state}')]
     )
     random_img = random.choice(all_files)
     return random_img

@@ -10,21 +10,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/elio_styles.css') }}">
 </head>
 <body>
-<div id="content" class="d-flex flex-column justify-content-center align-items-center vh-100">
+<div id="content" class="d-flex flex-column justify-content-center align-items-center">
+
+    <!-- Image Container -->
+    <div id="image-container" class="mb-3 custom-container">
+        <div id="image-wrapper"></div>
+    </div>
 
     <!-- Feed Button -->
-    <div id="feed-button" class="btn btn-lg btn-primary mb-3" onclick="toggleState()">
+    <div id="feed-button" class="btn btn-lg btn-primary mb-3 custom-container" onclick="toggleState()">
         <span id="icon" class="mr-2"></span>
         <span id="button-text"></span>
         <div id="as-of-date"></div>
     </div>
 
     <!-- Feed Table -->
-    <div id="feed-history" class="mt-3">
-        <table  id="feed-table" class="table">
+    <div id="feed-history" class="mt-3 custom-container">
+        <table id="feed-table" class="table">
+            <colgroup>
+              <col style="width: 10%;">
+              <col style="width: 80%;">
+              <col style="width: 10%;">
+            </colgroup>
             <thead>
                 <tr>
-                    <th scope="col">Time of Day</th>
+                    <th scope="col">Time</th>
                     <th scope="col">Date</th>
                     <th scope="col"></th>
                 </tr>
@@ -33,210 +43,185 @@
             </tbody>
         </table>
     </div>
-
 </div>
-    <script>
-        let state;
+<script>
+    let state;
 
-        function fetchImage() {
-            fetch(`/elio/get-image/${state}`)
-                .then(response => response.json())
-                .then(data => {
-                    const img = document.createElement('img');
-                    img.src = data.image;
-                    img.style.position = 'absolute';
-                    img.style.transition = 'opacity 2s';
-                    img.style.opacity = 0;
+    function fetchImage() {
+        fetch(`/elio/get-image/${state}`)
+            .then(response => response.json())
+            .then(data => {
+                const img = document.createElement('img');
+                img.src = data.image;
+                img.style.transition = 'opacity 2s';
+                img.style.opacity = 0;
 
-                    img.onload = () => {
-                        const viewportWidth = window.innerWidth;
-                        const viewportHeight = window.innerHeight;
+                img.onload = () => {
+                    img.style.opacity = 1;
+                    setTimeout(() => {
+                        img.style.opacity = 0;
+                        img.addEventListener('transitionend', () => {
+                            img.remove();
+                        });
+                    }, 15000);
+                };
 
-                        const maxX = viewportWidth - 2*img.width;
-                        const maxY = viewportHeight - img.height/2;
+                const imageWrapper = document.getElementById('image-wrapper');
+                imageWrapper.innerHTML = ''; // Clear any existing images
+                imageWrapper.appendChild(img);
+            });
+    }
 
-                        const randomX = img.width + Math.floor(Math.random() * maxX);
-                        const randomY = img.height/4 + Math.floor(Math.random() * maxY);
-
-                        img.style.left = `${randomX}px`;
-                        img.style.top = `${randomY}px`;
-
-                        img.style.opacity = 1;
-
-                        // Set timeout to fade out and remove the image after 5 seconds
-                        setTimeout(() => {
-                            img.style.opacity = 0;
-                            img.addEventListener('transitionend', () => {
-                                img.remove();
-                            });
-                        }, 15000);
-                    };
-
-                    document.getElementById('content').appendChild(img);
-                });
-        }
-        function fetchState() {
-            fetch('/elio/get-state')
-                .then(response => response.json())
-                .then(data => {
-                    setState(data.state, data.date);
-                });
-        }
-
-        function updateState(newState) {
-            fetch('/elio/get-state', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ state: newState })
-            })
+    function fetchState() {
+        fetch('/elio/get-state')
             .then(response => response.json())
             .then(data => {
                 setState(data.state, data.date);
-                fetchFeedHistory();
             });
-        }
+    }
 
-        function formatDateForDisplay(dateString) {
-            const date = new Date(dateString);
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOptions = { hour: 'numeric', minute: '2-digit' };
+    function updateState(newState) {
+        fetch('/elio/get-state', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ state: newState })
+        })
+        .then(response => response.json())
+        .then(data => {
+            setState(data.state, data.date);
+            fetchFeedHistory();
+        });
+    }
 
-            const formattedDate = date.toLocaleDateString(undefined, options);
-            const formattedTime = date.toLocaleTimeString(undefined, timeOptions);
+    function formatDateForDisplay(dateString) {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const timeOptions = { hour: 'numeric', minute: '2-digit' };
 
-            return `${formattedDate}, ${formattedTime}`;
-        }
+        const formattedDate = date.toLocaleDateString(undefined, options);
+        const formattedTime = date.toLocaleTimeString(undefined, timeOptions);
 
-        function formatDateForDisplayTable(dateString) {
-            const date = new Date(dateString);
+        return `${formattedDate}, ${formattedTime}`;
+    }
 
-            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    function formatDateForDisplayTable(dateString) {
+        const date = new Date(dateString);
 
-            const month = monthNames[date.getMonth()];
-            const day = date.getDate();
-            const hour = date.getHours();
-            const minutes = date.getMinutes();
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-            const daySuffix = (day) => {
-                if (day > 3 && day < 21) return 'th'; // catch 11th, 12th, 13th
-                switch (day % 10) {
-                    case 1:  return "st";
-                    case 2:  return "nd";
-                    case 3:  return "rd";
-                    default: return "th";
-                }
+        const month = monthNames[date.getMonth()];
+        const day = date.getDate();
+        const hour = date.getHours();
+        const minutes = date.getMinutes();
+
+        const daySuffix = (day) => {
+            if (day > 3 && day < 21) return 'th'; // catch 11th, 12th, 13th
+            switch (day % 10) {
+                case 1:  return "st";
+                case 2:  return "nd";
+                case 3:  return "rd";
+                default: return "th";
             }
-
-            const formattedDay = `${day}${daySuffix(day)}`;
-            const formattedTime = `${((hour + 11) % 12 + 1)}:${minutes < 10 ? '0' : ''}${minutes}${hour >= 12 ? 'pm' : 'am'}`;
-
-            return `${month} ${formattedDay}. ${formattedTime}`;
         }
 
-        function setState(newState = state, date = new Date().toLocaleString()) {
-            // log for debugging
-            state = newState;
-            console.log(`Setting state to: ${state}, date: ${date}`);
+        const formattedDay = `${day}${daySuffix(day)}`;
+        const formattedTime = `${((hour + 11) % 12 + 1)}:${minutes < 10 ? '0' : ''}${minutes}${hour >= 12 ? 'pm' : 'am'}`;
 
-            // Clear existing images
-            const contentDiv = document.getElementById('content');
-            const images = contentDiv.getElementsByTagName('img');
-            while (images.length > 0) {
-                contentDiv.removeChild(images[0]);
-            }
+        return `${month} ${formattedDay} ${formattedTime}`;
+    }
 
-            // Set background color based on state
-            document.body.style.backgroundColor = state === 'morning' ? '#f0e68c' : '#483d8b';
+    function setState(newState = state, date = new Date().toLocaleString()) {
+        state = newState;
+        console.log(`Setting state to: ${state}, date: ${date}`);
 
-            // Set button text and icon based on state
-            const buttonText = state === 'morning' ? "Elio has been fed breakfast" : "Elio has been fed dinner";
-            const iconText = state === 'morning' ? '🍳' : '🌙';
+        // Clear existing images
+        const imageWrapper = document.getElementById('image-wrapper');
+        imageWrapper.innerHTML = '';
 
-            document.getElementById('button-text').textContent = buttonText;
-            document.getElementById('icon').textContent = iconText;
+        // Set background color based on state
+        document.body.style.backgroundColor = state === 'morning' ? '#f0e68c' : '#483d8b';
 
-            // Determine whether to show the "as of" date
-            const now = new Date();
-            const savedDate = new Date(date);
-            // Consider date old if it's more than 24 hours old
-            const isOldDate = (now - savedDate) > 24 * 60 * 60 * 1000;
-            document.getElementById('as-of-date').textContent = isOldDate ? '' : `As of: ${formatDateForDisplay(date)}`;
+        // Set button text and icon based on state
+        const buttonText = state === 'morning' ? "Elio has been fed breakfast" : "Elio has been fed dinner";
+        const iconText = state === 'morning' ? '🍳' : '🌙';
 
-            // Set button border color and font color based on state
-            const button = document.getElementById('feed-button');
-            button.style.borderColor = state === 'morning' ? '#ffffff' : '#9370db';
-            button.style.color = state === 'morning' ? '#000000' : '#ffffff';
-            const mytablediv = document.getElementById('feed-history');
-            mytablediv.style.borderColor = state === 'morning' ? '#ffffff' : '#9370db';
-            mytablediv.style.color = state === 'morning' ? '#000000' : '#ffffff';
-            const mytable = document.getElementById('feed-table');
-            // mytable.style.borderColor = state === 'morning' ? '#ffffff' : '#9370db';
-            mytable.style.color = state === 'morning' ? '#000000' : '#ffffff';
-            // Change the border color of table cells
-            const tableCells = document.querySelectorAll('#feed-table th, #feed-table td');
-            tableCells.forEach(cell => {
-              cell.style.borderColor = state === 'morning' ? '#ffffff' : '#9370db';
-            });
-        }
+        document.getElementById('button-text').textContent = buttonText;
+        document.getElementById('icon').textContent = iconText;
 
-        function toggleState() {
-            // Toggle the state
-            const newState = state === 'morning' ? 'night' : 'morning';
-            updateState(newState);
-        }
+        // Determine whether to show the "as of" date
+        const now = new Date();
+        const savedDate = new Date(date);
+        const isOldDate = (now - savedDate) > 24 * 60 * 60 * 1000;
+        document.getElementById('as-of-date').textContent = isOldDate ? '' : `As of: ${formatDateForDisplay(date)}`;
 
-        function initializeState() {
-            fetchState();
-        }
+        // Set border color for containers based on state
+        const customContainers = document.querySelectorAll('.custom-container');
+        customContainers.forEach(container => {
+            container.style.borderColor = state === 'morning' ? '#ffffff' : '#9370db';
+            container.style.color = state === 'morning' ? '#000000' : '#ffffff';
+        });
 
-        function fetchFeedHistory() {
-            // Define the emoji mapping
-            const stateEmojiMap = {
-                'morning': '🍳',
-                'night': '🌙'
-            };
+        const feedTable = document.getElementById('feed-table');
+        feedTable.style.color = state === 'morning' ? '#000000' : '#ffffff';
 
-            fetch('/elio/feed-history')
-                .then(response => response.json())
-                .then(data => {
-                    const feedHistoryBody = document.getElementById('feed-history-body');
-                    feedHistoryBody.innerHTML = ''; // Clear the table
-                    data.forEach(entry => {
-                        const stateWithEmoji = `${entry.state} ${stateEmojiMap[entry.state] || ''}`;
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${stateWithEmoji}</td>
-                            <td>${formatDateForDisplayTable(entry.date)}</td>
-                            <td><button class="btn btn-danger btn-sm" onclick="removeFeedEntry(${entry.id})">Remove</button></td>
-                        `;
-                        feedHistoryBody.appendChild(row);
-                    });
-                });
-        }
+        const tableCells = document.querySelectorAll('#feed-table th, #feed-table td');
+        tableCells.forEach(cell => {
+            cell.style.borderColor = state === 'morning' ? '#ffffff' : '#9370db';
+        });
+    }
 
-        function removeFeedEntry(id) {
-            fetch(`/elio/remove-feed-entry/${id}`, {
-                method: 'DELETE'
-            })
+    function toggleState() {
+        const newState = state === 'morning' ? 'night' : 'morning';
+        updateState(newState);
+    }
+
+    function initializeState() {
+        fetchState();
+    }
+
+    function fetchFeedHistory() {
+        const stateEmojiMap = {
+            'morning': '🍳',
+            'night': '🌙'
+        };
+
+        fetch('/elio/feed-history')
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    fetchFeedHistory(); // Refresh the feed history
-                }
+                const feedHistoryBody = document.getElementById('feed-history-body');
+                feedHistoryBody.innerHTML = '';
+                data.forEach(entry => {
+                    const stateWithEmoji = `${stateEmojiMap[entry.state] || ''}`;
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${stateWithEmoji}</td>
+                        <td>${formatDateForDisplayTable(entry.date)}</td>
+                        <td><button class="btn btn-danger btn-sm" onclick="removeFeedEntry(${entry.id})">Remove</button></td>
+                    `;
+                    feedHistoryBody.appendChild(row);
+                });
             });
-        }
+    }
 
-        // On page load
-        document.addEventListener('DOMContentLoaded', fetchFeedHistory);
-        document.addEventListener('DOMContentLoaded', initializeState);
+    function removeFeedEntry(id) {
+        fetch(`/elio/remove-feed-entry/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                fetchFeedHistory();
+            }
+        });
+    }
 
-        // Fetch new image every X seconds
-        setInterval(fetchImage, 15000);
+    document.addEventListener('DOMContentLoaded', fetchFeedHistory);
+    document.addEventListener('DOMContentLoaded', initializeState);
 
-
-    </script>
+    setInterval(fetchImage, 15000);
+</script>
 </body>
 </html>
