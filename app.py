@@ -1,11 +1,9 @@
-from flask import (Flask, render_template)  # flash, make_response, redirect, request, jsonify,
-# import matplotlib.pyplot as plt
-# from matplotlib.figure import Figure
-# from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-# import io
-# import numpy as np
+from flask import (Flask, render_template, jsonify,request)  # flash, make_response, redirect, request, jsonify,
+
+from elio import StateManager, get_random_image
 
 app = Flask(__name__)
+state_manager = StateManager()
 
 @app.route('/')
 def index():
@@ -23,7 +21,6 @@ def Education():
 def Competitions():
     return render_template("Competitions.html",renderJumbotron=False)
 
-
 @app.route('/Projects')
 def Projects():
     return render_template("Projects.html",renderJumbotron=False)
@@ -40,5 +37,28 @@ def Resume():
 def More():
     return render_template("More.html",renderJumbotron=False)
 
+
+# Elio stuff
+@app.route('/elio')
+def elio_home():
+    return render_template('elio.html')
+
+@app.route('/elio/get-image/<state>')
+def get_elio_image(state):
+    folder = 'breakfast' if state == 'morning' else 'dinner'
+    return jsonify(image=get_random_image(folder))
+
+@app.route('/elio/get-state', methods=['GET'])
+def get_elio_state():
+    return jsonify(state_manager.get_state())
+
+@app.route('/elio/get-state', methods=['POST'])
+def set_elio_state():
+    new_state = request.json.get('state')
+    state_manager.set_state(new_state)
+    return jsonify(state_manager.get_state())
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+

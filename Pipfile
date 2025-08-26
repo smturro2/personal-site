@@ -10,9 +10,10 @@ numpy = "*"
 scipy = "*"
 quantum-tomography = "*"
 gunicorn = "*"
+python-dotenv = "*"
+tzdata = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "3.11"
-python_full_version = "3.11.9"
+#[requires]
+#python_version = "3.11"
+#python_full_version = "3.11.9"

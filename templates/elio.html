@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elio's Feeding Schedule</title>
+    <link rel="icon" href="{{ url_for('static', filename='imgs/elio/favicon.png') }}" type="image/x-icon">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elio_styles.css') }}">
+</head>
+<body>
+    <div id="content" class="d-flex justify-content-center align-items-center vh-100" onclick="toggleState()">
+        <div id="feed-button" class="btn btn-lg btn-primary">
+            <span id="icon" class="mr-2"></span>
+            <span id="button-text"></span>
+            <div id="as-of-date"></div>
+        </div>
+    </div>
+    <script>
+        let state;
+
+        function fetchImage() {
+            fetch(`/elio/get-image/${state}`)
+                .then(response => response.json())
+                .then(data => {
+                    const img = document.createElement('img');
+                    img.src = data.image;
+                    img.style.position = 'absolute';
+                    img.style.transition = 'opacity 2s';
+                    img.style.opacity = 0;
+
+                    img.onload = () => {
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+
+                        const maxX = viewportWidth - 2*img.width;
+                        const maxY = viewportHeight - img.height/2;
+
+                        const randomX = img.width + Math.floor(Math.random() * maxX);
+                        const randomY = img.height/4 + Math.floor(Math.random() * maxY);
+
+                        img.style.left = `${randomX}px`;
+                        img.style.top = `${randomY}px`;
+
+                        img.style.opacity = 1;
+
+                        // Set timeout to fade out and remove the image after 5 seconds
+                        setTimeout(() => {
+                            img.style.opacity = 0;
+                            img.addEventListener('transitionend', () => {
+                                img.remove();
+                            });
+                        }, 15000);
+                    };
+
+                    document.getElementById('content').appendChild(img);
+                });
+        }
+        function fetchState() {
+            fetch('/elio/get-state')
+                .then(response => response.json())
+                .then(data => {
+                    setState(data.state, data.date);
+                });
+        }
+
+        function updateState(newState) {
+            fetch('/elio/get-state', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ state: newState })
+            })
+            .then(response => response.json())
+            .then(data => {
+                setState(data.state, data.date);
+            });
+        }
+
+        function formatDateForDisplay(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: 'numeric', minute: '2-digit' };
+
+            const formattedDate = date.toLocaleDateString(undefined, options);
+            const formattedTime = date.toLocaleTimeString(undefined, timeOptions);
+
+            return `${formattedDate}, ${formattedTime}`;
+        }
+
+        function setState(newState = state, date = new Date().toLocaleString()) {
+            // log for debugging
+            state = newState;
+            console.log(`Setting state to: ${state}, date: ${date}`);
+
+            // Clear existing images
+            const contentDiv = document.getElementById('content');
+            const images = contentDiv.getElementsByTagName('img');
+            while (images.length > 0) {
+                contentDiv.removeChild(images[0]);
+            }
+
+            // Set background color based on state
+            document.body.style.backgroundColor = state === 'morning' ? '#f0e68c' : '#483d8b';
+
+            // Set button text and icon based on state
+            const buttonText = state === 'morning' ? "Elio has been fed breakfast" : "Elio has been fed dinner";
+            const iconText = state === 'morning' ? '🍳' : '🌙';
+
+            document.getElementById('button-text').textContent = buttonText;
+            document.getElementById('icon').textContent = iconText;
+
+            // Determine whether to show the "as of" date
+            const now = new Date();
+            const savedDate = new Date(date);
+            // Consider date old if it's more than 24 hours old
+            const isOldDate = (now - savedDate) > 24 * 60 * 60 * 1000;
+            document.getElementById('as-of-date').textContent = isOldDate ? '' : `As of: ${formatDateForDisplay(date)}`;
+
+            // Set button border color and font color based on state
+            const button = document.getElementById('feed-button');
+            button.style.borderColor = state === 'morning' ? '#ffffff' : '#9370db';
+            button.style.color = state === 'morning' ? '#000000' : '#ffffff';
+        }
+
+        function toggleState() {
+            // Toggle the state
+            const newState = state === 'morning' ? 'night' : 'morning';
+            updateState(newState);
+        }
+
+        function initializeState() {
+            fetchState();
+        }
+
+        // Initialize state on page load
+        document.addEventListener('DOMContentLoaded', initializeState);
+
+        // Fetch new image every X seconds
+        setInterval(fetchImage, 15000);
+    </script>
+</body>
+</html>
