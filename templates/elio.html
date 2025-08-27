@@ -172,7 +172,7 @@
 
         // Set button text and icon based on state
         const buttonText = state === 'morning' ? "Elio has been fed breakfast" : "Elio has been fed dinner";
-        const iconText = state === 'morning' ? '☀️' : '🌙';
+        const iconText = state === 'morning' ? '🍳' : '🌙';
 
         document.getElementById('button-text').textContent = buttonText;
         document.getElementById('icon').textContent = iconText;
@@ -210,7 +210,7 @@
 
     function fetchFeedHistory() {
         const stateEmojiMap = {
-            'morning': '☀️',
+            'morning': '🍳',
             'night': '🌙'
         };
 
