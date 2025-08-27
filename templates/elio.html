@@ -46,6 +46,8 @@
 </div>
 <script>
     let state;
+    const fadeTime = 1000; // in milliseconds
+    const intervalTime = 5000; // in milliseconds
 
     function fetchImage() {
         fetch(`/elio/get-image/${state}`)
@@ -53,22 +55,28 @@
             .then(data => {
                 const img = document.createElement('img');
                 img.src = data.image;
-                img.style.transition = 'opacity 2s';
+                img.style.transition = `opacity ${fadeTime / 1000}s`;
                 img.style.opacity = 0;
 
                 img.onload = () => {
-                    img.style.opacity = 1;
+                    // Append the image first, then trigger the fade-in
+                    const imageWrapper = document.getElementById('image-wrapper');
+                    imageWrapper.innerHTML = ''; // Clear any existing images
+                    imageWrapper.appendChild(img);
+
+                    // Use a short timeout to ensure the image is properly appended before starting the transition
+                    setTimeout(() => {
+                        img.style.opacity = 1;
+                    }, 10); // 10ms delay to ensure the browser registers the initial state
+
                     setTimeout(() => {
                         img.style.opacity = 0;
                         img.addEventListener('transitionend', () => {
                             img.remove();
+                            fetchImage();
                         });
-                    }, 15000);
+                    }, intervalTime);
                 };
-
-                const imageWrapper = document.getElementById('image-wrapper');
-                imageWrapper.innerHTML = ''; // Clear any existing images
-                imageWrapper.appendChild(img);
             });
     }
 
@@ -79,6 +87,22 @@
                 setState(data.state, data.date);
                 fetchImage();
             });
+    }
+
+    function updateState(newState) {
+        fetch('/elio/get-state', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ state: newState })
+        })
+        .then(response => response.json())
+        .then(data => {
+            setState(data.state, data.date);
+            fetchFeedHistory();
+            fetchImage();
+        });
     }
 
     function updateState(newState) {
@@ -148,7 +172,7 @@
 
         // Set button text and icon based on state
         const buttonText = state === 'morning' ? "Elio has been fed breakfast" : "Elio has been fed dinner";
-        const iconText = state === 'morning' ? '🍳' : '🌙';
+        const iconText = state === 'morning' ? '☀️' : '🌙';
 
         document.getElementById('button-text').textContent = buttonText;
         document.getElementById('icon').textContent = iconText;
@@ -186,7 +210,7 @@
 
     function fetchFeedHistory() {
         const stateEmojiMap = {
-            'morning': '🍳',
+            'morning': '☀️',
             'night': '🌙'
         };
 
@@ -220,10 +244,10 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', fetchFeedHistory);
-    document.addEventListener('DOMContentLoaded', initializeState);
-
-    setInterval(fetchImage, 15000);
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchFeedHistory();
+        initializeState();
+    });
 </script>
 </body>
 </html>
