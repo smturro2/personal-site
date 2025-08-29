@@ -56,12 +56,20 @@ class StateManager:
             cursor.execute('DELETE FROM state WHERE id = ?', (entry_id,))
             conn.commit()
 
-
-def get_random_image(state=None, add_food_images=False):
+image_idx = 0
+def get_random_image(state=None, add_food_images=False, random=False):
     all_files = [f'static/img/elio/elio_pics/{x}' for x in os.listdir('static/img/elio/elio_pics')]
-
     if state != None and add_food_images:
         all_files.extend([f'static/img/elio/{state}/{x}' for x in os.listdir(f'static/img/elio/{state}')])
+    all_files = sorted(all_files)
+    all_files = [x for x in all_files if x != "desktop.ini"]
 
-    random_img = random.choice(all_files)
+    if random:
+        random_img = random.choice(all_files)
+    else:
+        # temp cycle
+        global image_idx
+        random_img = all_files[image_idx % len(all_files)]
+        image_idx += 1
+    
     return random_img

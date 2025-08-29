@@ -21,8 +21,14 @@ div#content {
 }
 
 #image-container {
-    height: 50vh;
-    min-height:500px;
+    /* height: 50vh;
+    min-height:500px; 
+    max-width: 100%;
+    */
+
+    aspect-ratio: 1; /* This ensures the height is 3/2 times the width */
+    /* width: 100%; Ensures the image container takes the full width of its parent */
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,10 +36,8 @@ div#content {
 }
 
 #image-container img {
-    max-height: 100%;
-    max-width: 100%;
     height: auto;
-    width: auto;
+    width: 100%;
 }
 
 div#feed-button {
